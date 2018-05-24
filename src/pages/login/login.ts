@@ -50,8 +50,12 @@ export class LoginPage {
         error => this.loginError = error.message
       );
   }
-  loginWithGoogle(){
-
+  loginWithGoogle() {
+    this.auth.signInWithGoogle()
+      .then(
+        () => this.navCtrl.setRoot(HomePage),
+        error => console.log(error.message)
+      );
   }
   signup(){
     this.navCtrl.push(SignupPage);
