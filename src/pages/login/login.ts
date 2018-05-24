@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {HomePage} from "../home/home";
+import {SignupPage} from "../signup/signup";
 
 
 
@@ -53,7 +54,7 @@ export class LoginPage {
 
   }
   signup(){
-
+    this.navCtrl.push(SignupPage);
   }
   resetPassword(){
 

@@ -6,6 +6,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
 import { NgxErrorsModule } from '@ultimate/ngxerrors';
+import { SignupPage } from '../pages/signup/signup';
+
 
 
 
@@ -28,6 +30,7 @@ import {AuthService} from "../services/auth.service";
     HomePage,
     TabsPage,
     LoginPage,
+    SignupPage
 
   ],
   imports: [
@@ -44,7 +47,8 @@ import {AuthService} from "../services/auth.service";
     ContactPage,
     HomePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    SignupPage
   ],
   providers: [
     StatusBar,
