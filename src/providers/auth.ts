@@ -5,7 +5,7 @@ import AuthProvider = firebase.auth.AuthProvider;
 
 @Injectable()
 export class AuthService {
-    private user: firebase.User;
+    private user?: firebase.User = null;
 
     constructor(public afAuth: AngularFireAuth) {
         afAuth.authState.subscribe(user => {
@@ -34,12 +34,16 @@ export class AuthService {
         );
     }
 
+    getUser() {
+        return this.user;
+    }
+
     signOut(): Promise<void> {
         return this.afAuth.auth.signOut();
     }
 
     getEmail() {
-        return this.user && this.user.email;
+        return this.user.email;
     }
 
     private oauthSignIn(provider: AuthProvider) {

@@ -1,14 +1,12 @@
 import {Component, ViewChild} from '@angular/core';
-import {MenuController, Nav, Platform} from 'ionic-angular';
+import {Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
 import {LoginPage} from '../pages/login/login';
-import {TabsPage} from '../pages/tabs/tabs';
 
 import {AuthService} from "../providers/auth";
 import {HomePage} from "../pages/home/home";
-import {PicturePage} from "../pages/picture/picture";
 
 @Component({
     templateUrl: 'app.html'
@@ -16,11 +14,10 @@ import {PicturePage} from "../pages/picture/picture";
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
 
-    public rootPage: any = TabsPage;
-    private menu: MenuController;
+    rootPage: any = LoginPage;
+    pages;
 
-    constructor(public platform: Platform, menu: MenuController, public statusBar: StatusBar, public splashScreen: SplashScreen, private auth: AuthService) {
-        this.menu = menu;
+    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public auth: AuthService) {
         this.initializeApp();
     }
 
@@ -31,29 +28,8 @@ export class MyApp {
         });
 
         this.auth.afAuth.authState
-            .subscribe(
-                user => {
-                    if (user) {
-                        this.rootPage = TabsPage;
-                    } else {
-                        this.rootPage = PicturePage;
-                    }
-                },
-                () => {
-                    this.rootPage = PicturePage;
-                }
+            .subscribe(user => this.rootPage = user ? HomePage : LoginPage,
+                () => this.rootPage = LoginPage
             );
-    }
-
-    login() {
-        this.menu.close();
-        this.auth.signOut();
-        this.nav.setRoot(LoginPage)
-    }
-
-    logout() {
-        this.menu.close();
-        this.auth.signOut();
-        this.nav.setRoot(HomePage);
     }
 }

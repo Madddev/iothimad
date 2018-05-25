@@ -1,17 +1,18 @@
 import {Component} from '@angular/core';
-
-import {AboutPage} from '../about/about';
-import {HomePage} from '../home/home';
-import {PicturePage} from "../picture/picture";
+import {AboutPage} from "../../pages/about/about";
+import {PicturePage} from "../../pages/picture/picture";
+import {HomePage} from "../../pages/home/home";
+import {AuthService} from "../../providers/auth";
 
 @Component({
-    templateUrl: 'tabs.html'
+    selector: 'app-nav',
+    templateUrl: 'nav.html'
 })
-export class TabsPage {
+export class NavComponent {
 
     public tabs: Array<object>;
 
-    constructor() {
+    constructor(public auth: AuthService) {
         this.tabs = [
             {
                 page: HomePage,

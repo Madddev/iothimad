@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {IonicPage, Loading, LoadingController} from 'ionic-angular';
 import {PictureService} from "../../providers/picture";
 import {Camera, CameraOptions} from "@ionic-native/camera";
+import {AuthService} from "../../providers/auth";
 
 /**
  * Generated class for the PicturePage page.
@@ -20,14 +21,17 @@ export class PicturePage {
 
     private uploadSuccess = response => {
         console.log(response);
+
+        this.pictureService.setToUser(response.downloadURL, this.authService.getUser());
         this.loader.dismiss();
     };
+
     private uploadError = response => {
         console.log(response);
         this.loader.dismiss();
     };
 
-    constructor(private camera: Camera, private pictureService: PictureService, loaderController: LoadingController) {
+    constructor(private authService: AuthService, private camera: Camera, private pictureService: PictureService, loaderController: LoadingController) {
         this.loader = loaderController.create({
             content: 'Please wait a second'
         });
@@ -47,6 +51,8 @@ export class PicturePage {
         let pictureBase64 = await this.camera.getPicture(options);
 
         this.loader.present();
-        this.pictureService.add(pictureBase64).then(this.uploadSuccess, this.uploadError);
+        this.pictureService
+            .uploadToStorage(pictureBase64)
+            .then(this.uploadSuccess, this.uploadError);
     }
 }
