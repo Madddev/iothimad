@@ -35,7 +35,8 @@ export class MyApp {
             .subscribe(
                 user => {
                     if (user) {
-                        this.rootPage = MapPage;
+                        this.rootPage = HomePage;
+                        this.menu.enable(true);
                     } else {
                         this.rootPage = LoginPage;
                     }

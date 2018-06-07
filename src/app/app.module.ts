@@ -22,6 +22,7 @@ import {Camera} from "@ionic-native/camera";
 import { Geolocation } from '@ionic-native/geolocation';
 import {AngularFirestore, AngularFirestoreModule} from 'angularfire2/firestore';
 import {MapPage} from "../pages/map/map";
+import {TabsComponent} from "../components/tabs/tabs";
 
 
 
@@ -34,7 +35,8 @@ import {MapPage} from "../pages/map/map";
         TabsPage,
         LoginPage,
         SignupPage,
-        MapPage
+        MapPage,
+        TabsComponent
     ],
     imports: [
         BrowserModule,
@@ -53,7 +55,8 @@ import {MapPage} from "../pages/map/map";
         TabsPage,
         LoginPage,
         SignupPage,
-        MapPage
+        MapPage,
+        TabsComponent
     ],
     providers: [
         StatusBar,
