@@ -1,24 +1,36 @@
-import {Component} from '@angular/core';
-import {IonicPage, NavController} from 'ionic-angular';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../providers/auth";
-import {HomePage} from "../home/home";
-import {SignupPage} from "../signup/signup";
+import { Component } from "@angular/core";
+import { IonicPage, NavController } from "ionic-angular";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AuthService } from "../../providers/auth";
+import { HomePage } from "../home/home";
+import { SignupPage } from "../signup/signup";
 
 @IonicPage()
 @Component({
-    selector: 'page-login',
-    templateUrl: 'login.html',
+    selector: "page-login",
+    templateUrl: "login.html"
 })
 export class LoginPage {
-
     loginForm: FormGroup;
     loginError: string;
 
-    constructor(private navCtrl: NavController, private auth: AuthService, fb: FormBuilder) {
+    constructor(
+        private navCtrl: NavController,
+        private auth: AuthService,
+        fb: FormBuilder
+    ) {
         this.loginForm = fb.group({
-            email: ['', Validators.compose([Validators.required, Validators.email])],
-            password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
+            email: [
+                "",
+                Validators.compose([Validators.required, Validators.email])
+            ],
+            password: [
+                "",
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(6)
+                ])
+            ]
         });
     }
 
@@ -31,15 +43,17 @@ export class LoginPage {
             email: data.email,
             password: data.password
         };
-        this.auth.signInWithEmail(credentials)
+        this.auth
+            .signInWithEmail(credentials)
             .then(
                 () => this.navCtrl.setRoot(HomePage),
-                error => this.loginError = error.message
+                error => (this.loginError = error.message)
             );
     }
 
     loginWithGoogle() {
-        this.auth.signInWithGoogle()
+        this.auth
+            .signInWithGoogle()
             .then(
                 () => this.navCtrl.setRoot(HomePage),
                 error => console.log(error.message)
@@ -50,7 +64,5 @@ export class LoginPage {
         this.navCtrl.push(SignupPage);
     }
 
-    resetPassword() {
-
-    }
+    resetPassword() {}
 }
