@@ -42,6 +42,10 @@ export class AuthService {
         return this.user && this.user.email;
     }
 
+    getUser() {
+      return this.user;
+    }
+
     private oauthSignIn(provider: AuthProvider) {
         if (!(<any>window).cordova) {
             return this.afAuth.auth.signInWithPopup(provider);

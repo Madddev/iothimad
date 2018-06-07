@@ -8,6 +8,7 @@ import {firebaseConfig} from '../config';
 import {NgxErrorsModule} from '@ultimate/ngxerrors';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
+ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import {AboutPage} from '../pages/about/about';
 import {HomePage} from '../pages/home/home';
@@ -19,6 +20,9 @@ import {AuthService} from "../providers/auth";
 import {PictureService} from '../providers/picture';
 import {PicturePage} from "../pages/picture/picture";
 import {Camera} from "@ionic-native/camera";
+import { Geolocation } from '@ionic-native/geolocation';
+import {AngularFirestore, AngularFirestoreModule} from 'angularfire2/firestore';
+
 
 
 @NgModule({
@@ -30,13 +34,14 @@ import {Camera} from "@ionic-native/camera";
         TabsPage,
         LoginPage,
         SignupPage
-
     ],
     imports: [
         BrowserModule,
         IonicModule.forRoot(MyApp),
         AngularFireModule.initializeApp(firebaseConfig.fire),
-        NgxErrorsModule
+        NgxErrorsModule,
+        AngularFirestoreModule,
+        AngularFireAuthModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -52,10 +57,10 @@ import {Camera} from "@ionic-native/camera";
         StatusBar,
         SplashScreen,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
-        AngularFireAuth,
         AuthService,
         PictureService,
-        Camera
+        Camera,
+        Geolocation,
     ]
 })
 export class AppModule {

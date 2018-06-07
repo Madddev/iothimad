@@ -34,13 +34,13 @@ export class MyApp {
             .subscribe(
                 user => {
                     if (user) {
-                        this.rootPage = TabsPage;
-                    } else {
                         this.rootPage = PicturePage;
+                    } else {
+                        this.rootPage = LoginPage;
                     }
                 },
                 () => {
-                    this.rootPage = PicturePage;
+                    this.rootPage = LoginPage;
                 }
             );
     }

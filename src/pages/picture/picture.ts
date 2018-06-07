@@ -2,6 +2,9 @@ import {Component} from '@angular/core';
 import {IonicPage, Loading, LoadingController} from 'ionic-angular';
 import {PictureService} from "../../providers/picture";
 import {Camera, CameraOptions} from "@ionic-native/camera";
+import { Geolocation } from '@ionic-native/geolocation';
+import {AuthService} from "../../providers/auth";
+
 
 /**
  * Generated class for the PicturePage page.
@@ -16,9 +19,17 @@ import {Camera, CameraOptions} from "@ionic-native/camera";
     templateUrl: 'picture.html',
 })
 export class PicturePage {
+
+
     private loader: Loading;
 
     private uploadSuccess = response => {
+      this.geolocation.getCurrentPosition().then((resp) => {
+        let imagePath = response.downloadURL;
+        this.pictureService.addGeoloclisation(resp.coords.latitude,resp.coords.longitude,imagePath, this.authService.getUser().uid);
+      }).catch((error) => {
+        console.log('Error getting location', error);
+      });
         console.log(response);
         this.loader.dismiss();
     };
@@ -27,10 +38,10 @@ export class PicturePage {
         this.loader.dismiss();
     };
 
-    constructor(private camera: Camera, private pictureService: PictureService, loaderController: LoadingController) {
-        this.loader = loaderController.create({
-            content: 'Please wait a second'
-        });
+    constructor(private camera: Camera,private geolocation: Geolocation ,private pictureService: PictureService, loaderController: LoadingController, private authService: AuthService) {
+      this.loader = loaderController.create({
+        content: 'Please wait a second'
+      });
     }
 
     async takePicture() {
