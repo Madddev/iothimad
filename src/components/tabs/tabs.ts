@@ -21,9 +21,9 @@ export class TabsComponent {
   constructor() {
     this.tabs = [
       {
-        page: HomePage,
-        title: 'Home',
-        icon: 'home'
+        page: MapPage,
+        title: 'Map',
+        icon: 'map'
       },
       {
         page: PicturePage,
@@ -34,11 +34,6 @@ export class TabsComponent {
         page: AboutPage,
         title: 'About',
         icon: 'information-circle'
-      },
-      {
-        page: MapPage,
-        title: 'Map',
-        icon: 'map'
       }
     ]
   }

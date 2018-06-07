@@ -30,24 +30,22 @@ interface Items {
 export class MapPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
-  itemsCollection: AngularFirestoreCollection<Items>; //Firestore collection
-  items: Observable<Items[]>; // read collection
+  itemsCollection: AngularFirestoreCollection<Items>;
+  items: Observable<Items[]>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private authService: AuthService,public geolocation: Geolocation, db: AngularFirestore, public serviceDeRequette: PictureService) {
-    this.itemsCollection = db.collection<Items>('users_pictures_geoloc'); //ref()
+    this.itemsCollection = db.collection<Items>('users_pictures_geoloc');
     this.items = this.itemsCollection.snapshotChanges().map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data() as Items;
         const id = a.payload.doc.id;
-        //console.log(a.payload.doc.id)
-        //console.log("test"+a.payload.doc.data())
+
         return {id, ...data};
       })
     })
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MapPage');
     this.carte();
   }
 
@@ -57,7 +55,6 @@ export class MapPage {
       let latLng = new google.maps.LatLng(position.coords.latitude,
         position.coords.longitude);
 
-     // console.log("lattitude" + position.coords.latitude + "longitude" + position.coords.longitude)
       let mapOptions = {
         center: latLng,
         zoom: 15,
@@ -84,7 +81,7 @@ export class MapPage {
       }
     });
     let content = `
-      <h4>image de ${this.authService.getEmail()}</h4>
+      <h4>image de ${item.userId}</h4>
       <div style="text-align: center"><img style="width: 100px;height: 100px" src="${item.imagePath}"></div>
     `;
     this.addInfoWindow(marker, content);

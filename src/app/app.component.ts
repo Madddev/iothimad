@@ -4,11 +4,8 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
 import {LoginPage} from '../pages/login/login';
-import {TabsPage} from '../pages/tabs/tabs';
 
 import {AuthService} from "../providers/auth";
-import {HomePage} from "../pages/home/home";
-import {PicturePage} from "../pages/picture/picture";
 import {MapPage} from "../pages/map/map";
 
 @Component({
@@ -17,7 +14,7 @@ import {MapPage} from "../pages/map/map";
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
 
-    public rootPage: any = TabsPage;
+    public rootPage: any = LoginPage;
     private menu: MenuController;
 
     constructor(public platform: Platform, menu: MenuController, public statusBar: StatusBar, public splashScreen: SplashScreen, private auth: AuthService) {
@@ -35,7 +32,7 @@ export class MyApp {
             .subscribe(
                 user => {
                     if (user) {
-                        this.rootPage = HomePage;
+                        this.rootPage = MapPage;
                         this.menu.enable(true);
                     } else {
                         this.rootPage = LoginPage;
@@ -56,6 +53,5 @@ export class MyApp {
     logout() {
         this.menu.close();
         this.auth.signOut();
-        this.nav.setRoot(HomePage);
     }
 }

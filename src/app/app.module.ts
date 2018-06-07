@@ -11,7 +11,6 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import {AboutPage} from '../pages/about/about';
 import {HomePage} from '../pages/home/home';
-import {TabsPage} from '../pages/tabs/tabs';
 import {LoginPage} from '../pages/login/login';
 import {SignupPage} from '../pages/signup/signup';
 
@@ -32,7 +31,6 @@ import {TabsComponent} from "../components/tabs/tabs";
         AboutPage,
         HomePage,
         PicturePage,
-        TabsPage,
         LoginPage,
         SignupPage,
         MapPage,
@@ -52,7 +50,6 @@ import {TabsComponent} from "../components/tabs/tabs";
         AboutPage,
         HomePage,
         PicturePage,
-        TabsPage,
         LoginPage,
         SignupPage,
         MapPage,

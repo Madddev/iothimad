@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import {IonicPage, Loading, LoadingController} from 'ionic-angular';
+import {IonicPage, Loading, LoadingController, NavController} from 'ionic-angular';
 import {PictureService} from "../../providers/picture";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import { Geolocation } from '@ionic-native/geolocation';
 import {AuthService} from "../../providers/auth";
+import {MapPage} from "../map/map";
 
 
 /**
@@ -27,18 +28,18 @@ export class PicturePage {
       this.geolocation.getCurrentPosition().then((resp) => {
         let imagePath = response.downloadURL;
         this.pictureService.addGeoloclisation(resp.coords.latitude,resp.coords.longitude,imagePath, this.authService.getUser().uid);
+        this.nav.push(MapPage);
       }).catch((error) => {
         console.log('Error getting location', error);
       });
-        console.log(response);
-        this.loader.dismiss();
-    };
-    private uploadError = response => {
-        console.log(response);
         this.loader.dismiss();
     };
 
-    constructor(private camera: Camera,private geolocation: Geolocation ,private pictureService: PictureService, loaderController: LoadingController, private authService: AuthService) {
+    private uploadError = response => {
+        this.loader.dismiss();
+    };
+
+    constructor(private nav: NavController, private camera: Camera,private geolocation: Geolocation ,private pictureService: PictureService, loaderController: LoadingController, private authService: AuthService) {
       this.loader = loaderController.create({
         content: 'Please wait a second'
       });
