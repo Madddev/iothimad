@@ -8,8 +8,7 @@ import {firebaseConfig} from '../config';
 import {NgxErrorsModule} from '@ultimate/ngxerrors';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
- import { AngularFireAuthModule } from 'angularfire2/auth';
-
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import {AboutPage} from '../pages/about/about';
 import {HomePage} from '../pages/home/home';
 import {TabsPage} from '../pages/tabs/tabs';
@@ -22,6 +21,7 @@ import {PicturePage} from "../pages/picture/picture";
 import {Camera} from "@ionic-native/camera";
 import { Geolocation } from '@ionic-native/geolocation';
 import {AngularFirestore, AngularFirestoreModule} from 'angularfire2/firestore';
+import {MapPage} from "../pages/map/map";
 
 
 
@@ -33,7 +33,8 @@ import {AngularFirestore, AngularFirestoreModule} from 'angularfire2/firestore';
         PicturePage,
         TabsPage,
         LoginPage,
-        SignupPage
+        SignupPage,
+        MapPage
     ],
     imports: [
         BrowserModule,
@@ -51,7 +52,8 @@ import {AngularFirestore, AngularFirestoreModule} from 'angularfire2/firestore';
         PicturePage,
         TabsPage,
         LoginPage,
-        SignupPage
+        SignupPage,
+        MapPage
     ],
     providers: [
         StatusBar,

@@ -9,6 +9,7 @@ import {TabsPage} from '../pages/tabs/tabs';
 import {AuthService} from "../providers/auth";
 import {HomePage} from "../pages/home/home";
 import {PicturePage} from "../pages/picture/picture";
+import {MapPage} from "../pages/map/map";
 
 @Component({
     templateUrl: 'app.html'
@@ -34,7 +35,7 @@ export class MyApp {
             .subscribe(
                 user => {
                     if (user) {
-                        this.rootPage = PicturePage;
+                        this.rootPage = MapPage;
                     } else {
                         this.rootPage = LoginPage;
                     }
